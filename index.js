@@ -18,9 +18,7 @@ const credentials = {
   ca: ca
 };
 
-app.use((req, res) => {
-  res.send('Hello there !');
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Starting both http & https servers
 const httpServer = http.createServer(httpRedirect);
