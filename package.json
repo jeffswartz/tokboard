@@ -1,0 +1,20 @@
+{
+  "name": "tokboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davemun/tokboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davemun/tokboard/issues"
+  },
+  "homepage": "https://github.com/davemun/tokboard#readme"
+}
