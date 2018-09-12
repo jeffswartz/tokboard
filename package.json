@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/davemun/tokboard/issues"
   },
-  "homepage": "https://github.com/davemun/tokboard#readme"
+  "homepage": "https://github.com/davemun/tokboard#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }

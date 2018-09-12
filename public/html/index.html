@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<style>
+  html {
+  background: #FED69F url('https://cl.ly/293E2Q1h3g0Q/ouija-board.svg') no-repeat;
+  background-size:cover;
+  }
+  .a {
+    width: 20%;
+    height: 200px;
+    position: relative;
+  }
+  img {width: 90%;margin-left: 4%;padding-top: 100px;}
+</style>
+<body>
+
+<div class="a">
+  <img src="https://cl.ly/3B2S0S1A3x3T/heart.svg" alt="" class="b"/>
+</div>
+
+</body>
+<script>
+  TweenLite.to(".a", 2, {skewX:200, left:"10%", top:"200px"});
+  TweenLite.to(".b", 4, {rotation:1490})
+</script>
+</html>
