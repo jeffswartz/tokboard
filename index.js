@@ -5,6 +5,7 @@ const https = require('https');
 const express = require('express');
 
 const app = express();
+const httpRedirect = express();
 
 // Certificate
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/tokboard.com/privkey.pem', 'utf8');
@@ -22,14 +23,14 @@ app.use((req, res) => {
 });
 
 // Starting both http & https servers
-const httpServer = http.createServer(app);
-http.get('*', function(req, res) {
-    res.redirect('https://' + req.headers.host + req.url);
-})
+const httpServer = http.createServer(httpRedirect);
+httpRedirect.get("*", function (req, res, next) {
+    res.redirect("https://tokboard.com" + req.path);
+});
 
 const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(80, (req, res) => {
+httpServer.listen(80, () => {
   console.log('HTTP Server running on port 80, will redirect to HTTPS');
 });
 
