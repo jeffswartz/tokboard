@@ -1,6 +1,7 @@
 // Dependencies
 const fs = require('fs');
 const http = require('http');
+const path = require('path');
 const https = require('https');
 const express = require('express');
 
