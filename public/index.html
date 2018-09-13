@@ -31,13 +31,13 @@
 <body>
 
 <div id="canvasDiv"><canvas id="myCanvas" width="1250" height="841"></canvas></div>
-<div>
+<!-- <div>
   <p>Type your response (only use letters H-E-A-T-R):</p>
   <input type="text" maxlength="15" id="ouijaText">
   <p><span id="chars">15</span> characters remaining</p>
   <input type="submit" value="Submit" onclick="convertInput()"></input>
   <input type="button" value="Clear" onclick="clearInput()"></input>
-</div>
+</div> -->
 <audio id="audio">
   <source>
 </audio>
@@ -111,7 +111,7 @@ function clearInput() {
   $('#chars').text(textLength);
 }
 
-function convertInput(inputTextValue) {
+function renderOuijaAnswer(inputTextValue) {
     if (inputTextValue.length > 1) {
         console.log("user has input");
     }
