@@ -36,7 +36,7 @@ if (IS_PROD) {
 
   function handleInboundSms(request, response) {
     const params = Object.assign(request.query, request.body);
-    console.log(params);
+    console.log(JSON.stringify(params));
     response.status(204).send();
   }
 }
@@ -45,7 +45,7 @@ const httpApp = express();
 if (IS_PROD) {
   console.log('HTTP Server running as prod config, will redirect to HTTPS');
   httpApp.get('*', function (req, res, next) {
-      res.redirect("https://tokboard.com" + req.path);
+      res.redirect('https://tokboard.com' + req.path);
   });
 } else {
   console.log('HTTP Server running as dev config, will serve static content');
