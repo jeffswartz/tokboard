@@ -76,9 +76,9 @@ toastr.options = {
   "positionClass": "toast-top-center",
   "preventDuplicates": true,
   "onclick": null,
-  "showDuration": "300",
+  "showDuration": "1000",
   "hideDuration": "1000",
-  "timeOut": "5000",
+  "timeOut": "8000",
   "extendedTimeOut": "1000",
   "showEasing": "swing",
   "hideEasing": "linear",
@@ -92,5 +92,6 @@ function renderOujaQuestion(questionString, cb) {
 }
 
 function renderOuijaAnswer(answerString, cb) {
+
   cb();
 }

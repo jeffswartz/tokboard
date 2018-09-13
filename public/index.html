@@ -38,16 +38,7 @@
 </body>
 <script src="/js/messaging.js"></script>
 <script>
-var maxLength = 15;
-var textInput = document.getElementById('ouijaText');
-var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
-
-$(textInput).keyup(function() {
-  var textLength = $(textInput).val().length;
-  var textLength = maxLength - textLength;
-  $('#chars').text(textLength);
-});
 
 var ouijaLetters = {
   H: { x: 285, y: 60 },
@@ -100,11 +91,7 @@ function clearInput() {
   $('#chars').text(textLength);
 }
 
-function convertInput() {
-    var inputTextValue = $(textInput).val();
-    inputTextValue = inputTextValue.replace(/\s+/g, '');
-    console.log(inputTextValue);
-
+function convertInput(inputTextValue) {
     if (inputTextValue.length > 1) {
         console.log("user has input");
     }
