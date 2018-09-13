@@ -111,6 +111,67 @@ function clearInput() {
   $('#chars').text(textLength);
 }
 
+function renderOuijaAnswerDebug(debugX, debugY) {
+    if (inputTextValue.length > 1) {
+        console.log("user has input");
+    }
+    else {
+        alert("You didn't do anything.");
+    }
+
+    var tl = new TimelineLite({
+      repeat: 1,
+      repeatDelay: 3
+    });
+
+    var prevLetter;
+    for (i = 0; i < inputTextValue.length; i++) {
+        var letter = inputTextValue[i].toUpperCase();
+
+        if (prevLetter === letter) {
+          console.log(prevLetter);
+          tl.add(TweenLite.to(planchette, 1.5, {
+            ease: Power2.easeInOut,
+            bezier: {
+              curviness: 1.5,
+              values: [{
+                x: debugX + 15,
+                y: debugY + 15
+              }, {
+                x: debugX + 0,
+                y: debugY + 30
+              }, {
+                x: debugX + -15,
+                y: debugY +  15
+              }, {
+                x: debugX + 0,
+                y: debugY + 0
+              }]
+            }
+          }));
+        }
+        else {
+          tl.add(TweenLite.to(planchette, 1, {
+            ease: Power2.easeInOut,
+            x: debugX,
+            y: debugY
+          }));
+        }
+
+        prevLetter = letter;
+    }
+
+    tl.add(TweenLite.to(planchette, 1, {
+      ease: Power2.easeInOut,
+      x: ouijaLetters.GB.x,
+      y: ouijaLetters.GB.y
+    }));
+
+
+
+    tl.play();
+}
+
 function renderOuijaAnswer(inputTextValue) {
     if (inputTextValue.length > 1) {
         console.log("user has input");
