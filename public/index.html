@@ -15,7 +15,7 @@
     font-family: 'Open Sans', sans-serif;
   }
   div {
-    width: 1563px;
+    width: 1250px;
     margin: 0 auto;
     text-align: center;
   }
@@ -25,7 +25,7 @@
 </style>
 <body>
 
-<div><canvas id="myCanvas" width="1563" height="1052"></canvas></div>
+<div><canvas id="myCanvas" width="1250" height="841"></canvas></div>
 <div>
   <p>Type your response (only use letters H-E-A-T-R):</p>
   <input type="text" maxlength="15" id="ouijaText">
@@ -81,7 +81,7 @@ planchette.x = ouijaLetters.GB.x;
 planchette.y = ouijaLetters.GB.y;
 
 window.onload = function() {
-  context.drawImage(ouijaBoard, 0, 0, 1563, 1052);
+  context.drawImage(ouijaBoard, 0, 0, 1250, 841);
   context.drawImage(planchette.img, planchette.x, planchette.y, 158, 215);
 };
 
@@ -89,7 +89,7 @@ function draw() {
   window.requestAnimationFrame(draw);
   context.save();
   context.clearRect(0, 0, canvas.width, canvas.height);
-  context.drawImage(ouijaBoard, 0, 0, 1563, 1052);
+  context.drawImage(ouijaBoard, 0, 0, 1250, 841);
   //context.translate(planchette.registration.x, planchette.registration.y);
   //context.rotate(planchette.rotation * Math.PI / 180);
   context.drawImage(planchette.img, planchette.x, planchette.y, 158, 216);
