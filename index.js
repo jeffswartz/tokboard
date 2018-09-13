@@ -45,13 +45,6 @@ if (IS_PROD) {
   });
 
   function handleInboundSms(request, response) {
-    // remote: {"msisdn":"14156290902",
-    // "to":"12034569996",
-    // "messageId":"0B0000000FCD4831",
-    // "text":"hello",
-    // "type":"text",
-    // "keyword":"HELLO",
-    // "message-timestamp":"2018-09-13 05:58:23"}
     const params = Object.assign(request.query, request.body);
     questionsReceived.push(params.text);
     console.log(`emitting message: ${params.text}`);
@@ -79,17 +72,3 @@ const io = require('socket.io')(httpServer);
 io.on('connection', function(socket){
   console.log('a HTTP user connected');
 });
-
-
-function sendToConversation(text) {
-  // request({
-  //   method: 'PUT',
-  //   url: `https://api.nexmo.com/beta/conversations/${CONVERSATION_ID}`,
-  //   body: values,
-  //   json: true,
-  //   headers: {
-  //     'User-Agent': 'request'
-  //   }
-  // }, (err, res, body) => {
-  // });
-}

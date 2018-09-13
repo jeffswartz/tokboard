@@ -4,25 +4,36 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenLite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TimelineLite.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/nexmo-stitch@2.1.0/dist/conversationClient.min.js"></script>
 </head>
 <style>
-  html {
-  background: #FED69F url('https://cl.ly/293E2Q1h3g0Q/ouija-board.svg') no-repeat;
-  background-size:cover;
+  body {
+    background: black;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
   }
-  .a {
-    width: 20%;
-    height: 200px;
-    position: relative;
+  div {
+    width: 640px;
+    margin: 0 auto;
+    text-align: center;
   }
-  img {width: 90%;margin-left: 4%;padding-top: 100px;}
+  a, a:visited {
+    color: white;
+  }
 </style>
 <body>
 
-<div class="a">
-  <img src="https://cl.ly/3B2S0S1A3x3T/heart.svg" alt="" class="b"/>
+<div><canvas id="myCanvas" width="1563" height="1052"></canvas></div>
+<div>
+  <p>Type your response (only use letters H-E-A-T-R):</p>
+  <input type="text" maxlength="15" id="ouijaText">
+  <p><span id="chars">15</span> characters remaining</p>
+  <input type="submit" value="Submit" onclick="convertInput()"></input>
+  <input type="button" value="Clear" onclick="clearInput()"></input>
+  <p>If you're having trouble thinking of words, click <a href="http://wordsolver.net/solve#!q=HEATR&type=st_anagram&dic=d_twl&ml=15" target="_blank" />here</a>.</p>
 </div>
+
 <audio id="audio">
   <source>
 </audio>
@@ -30,7 +41,131 @@
 </body>
 <script src="/js/messaging.js">
 <script>
-  TweenLite.to(".a", 2, {skewX:200, left:"10%", top:"200px"});
-  TweenLite.to(".b", 4, {rotation:1490})
+var maxLength = 15;
+var textInput = document.getElementById('ouijaText');
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+
+$(textInput).keyup(function() {
+  var textLength = $(textInput).val().length;
+  var textLength = maxLength - textLength;
+  $('#chars').text(textLength);
+});
+
+var ouijaLetters = {
+  H: { x: 285, y: 60 },
+  E: { x: 160, y: 65 },
+  A: { x: 0, y: 125 },
+  T: { x: 235, y: 120 },
+  R: { x: 155, y: 135 },
+  GB: { x: 145, y: 300}
+};
+
+var ouijaBoard = new Image();
+ouijaBoard.src = 'https://tokboard.com/images/ouija.jpeg';
+
+var planchette = {
+  x: ouijaLetters.GB.x,
+  y: ouijaLetters.GB.y,
+  img: new Image(),
+  registration: {
+    x: 54,
+    y: 73
+  },
+  rotation: 0
+};
+
+planchette.img.src = 'http://i67.tinypic.com/2b6u5e.jpg';
+planchette.x = ouijaLetters.GB.x;
+planchette.y = ouijaLetters.GB.y;
+
+window.onload = function() {
+  context.drawImage(ouijaBoard, 0, 0, 640, 430);
+  context.drawImage(planchette.img, planchette.x, planchette.y, 158, 215);
+};
+
+function draw() {
+  window.requestAnimationFrame(draw);
+  context.save();
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.drawImage(ouijaBoard, 0, 0, 640, 430);
+  //context.translate(planchette.registration.x, planchette.registration.y);
+  //context.rotate(planchette.rotation * Math.PI / 180);
+  context.drawImage(planchette.img, planchette.x, planchette.y, 158, 216);
+  context.restore();
+};
+
+window.requestAnimationFrame(draw);
+
+function clearInput() {
+  textInput = textInput.value = "";
+  textLength = 15;
+  $('#chars').text(textLength);
+}
+
+function convertInput() {
+    var inputTextValue = $(textInput).val();
+    inputTextValue = inputTextValue.replace(/\s+/g, '');
+    console.log(inputTextValue);
+
+    if (inputTextValue.length > 1) {
+        console.log("user has input");
+    }
+    else {
+        alert("You didn't do anything.");
+    }
+
+    var tl = new TimelineLite({
+      repeat: 1,
+      repeatDelay: 3
+    });
+
+    var prevLetter;
+    for (i = 0; i < inputTextValue.length; i++) {
+        var letter = inputTextValue[i].toUpperCase();
+
+        if (prevLetter === letter) {
+          console.log(prevLetter);
+          tl.add(TweenLite.to(planchette, 1.5, {
+            ease: Power2.easeInOut,
+            bezier: {
+              curviness: 1.5,
+              values: [{
+                x: ouijaLetters[letter].x + 15,
+                y: ouijaLetters[letter].y + 15
+              }, {
+                x: ouijaLetters[letter].x + 0,
+                y: ouijaLetters[letter].y + 30
+              }, {
+                x: ouijaLetters[letter].x + -15,
+                y: ouijaLetters[letter].y +  15
+              }, {
+                x: ouijaLetters[letter].x + 0,
+                y: ouijaLetters[letter].y + 0
+              }]
+            }
+          }));
+        }
+        else {
+          tl.add(TweenLite.to(planchette, 1, {
+            ease: Power2.easeInOut,
+            x: ouijaLetters[letter].x,
+            y: ouijaLetters[letter].y
+          }));
+        }
+
+        prevLetter = letter;
+    }
+
+    tl.add(TweenLite.to(planchette, 1, {
+      ease: Power2.easeInOut,
+      x: ouijaLetters.GB.x,
+      y: ouijaLetters.GB.y
+    }));
+
+
+
+    tl.play();
+}
 </script>
 </html>

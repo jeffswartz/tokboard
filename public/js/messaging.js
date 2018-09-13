@@ -30,9 +30,6 @@ class ChatApp {
     });
 
     conversation.on('text', (sender, message) => {
-      console.log('*** Message received', sender.id, message.body.text);
-      let dateStr = new Date(Date.parse(message.timestamp)).toString();
-      dateStr = dateStr.substring(dateStr.indexOf('2018') + 4, dateStr.indexOf('GMT'));
       const voice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
       conversation.media.sayText({
         text: message.body.text,
