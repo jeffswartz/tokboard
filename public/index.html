@@ -189,9 +189,17 @@ function renderOuijaAnswer(inputTextValue, cb) {
       y: ouijaLetters.GB.y
     }));
 
-    tl.eventCallback("onComplete", cb);
-
-    tl.play();
+    timelinePromise(tl.play()).then(cb);
 }
+
+var timelinePromise = function(timeline) {
+   return new Promise(function(resolve) {
+      //alternate syntax for adding a callback
+      timeline.eventCallback("onComplete", function() {
+         resolve(true);
+      })
+   });
+}
+
 </script>
 </html>
