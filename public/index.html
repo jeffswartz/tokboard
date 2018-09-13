@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/nexmo-stitch@2.1.0/dist/conversationClient.min.js"></script>
 </head>
 <style>
   html {
@@ -21,8 +22,12 @@
 <div class="a">
   <img src="https://cl.ly/3B2S0S1A3x3T/heart.svg" alt="" class="b"/>
 </div>
+<audio id="audio">
+  <source>
+</audio>
 
 </body>
+<script src="/js/messaging.js">
 <script>
   TweenLite.to(".a", 2, {skewX:200, left:"10%", top:"200px"});
   TweenLite.to(".b", 4, {rotation:1490})
