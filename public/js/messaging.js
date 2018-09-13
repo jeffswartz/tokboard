@@ -38,15 +38,15 @@ class ChatApp {
       storage[id] = storage[id] || {};
       storage[id][type] = msg;
       if (type == 'question') {
-        // renderOujaQuestion(storage[id].question, () => {
-          // renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
+        renderOujaQuestion(storage[id].question, () => {
+          renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
             const voice = voices[Math.floor(Math.random() * englishVoices.length)];
             conversation.media.sayText({
               text: storage[id].answer || 'Reply hazy, try again',
               voice_name: voice
             });
-          // });
-        // });
+          });
+        });
       }
     });
   }
@@ -68,3 +68,29 @@ class ChatApp {
 }
 
 new ChatApp();
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-center",
+  "preventDuplicates": true,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+
+function renderOujaQuestion(questionString, cb) {
+  toastr["success"]("asd");
+  cb()
+}
+
+function renderOuijaAnswer(answerString, cb) {
+  cb();
+}
