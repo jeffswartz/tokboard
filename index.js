@@ -56,23 +56,30 @@ if (IS_PROD) {
 
 const httpApp = express();
 if (IS_PROD) {
-  const io = require('socket.io')(httpsApp);
+  const io = require('socket.io')(httpsServer);
+  io.on('connection', function(socket){
+    console.log('a user connected');
+  });
   console.log('HTTP Server running as prod config, will redirect to HTTPS');
   httpApp.get('*', function (req, res, next) {
       res.redirect('https://tokboard.com' + req.path);
   });
 } else {
-  const io = require('socket.io')(httpApp);
   console.log('HTTP Server running as dev config, will serve static content');
   httpApp.use(express.static(path.join(__dirname, 'public')));
 }
-io.on('connection', function(socket){
-  console.log('a user connected');
-});
+
 const httpServer = http.createServer(httpApp);
 httpServer.listen(IS_PROD ? 80 : 8080, () => {
   console.log('HTTP Server running on port 80');
 });
+if (!IS_PROD) {
+  const io = require('socket.io')(httpServer);
+  io.on('connection', function(socket){
+    console.log('a user connected');
+  });
+}
+
 
 function sendToConversation(text) {
   // request({
