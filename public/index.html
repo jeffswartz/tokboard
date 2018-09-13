@@ -139,7 +139,7 @@ function renderOuijaAnswerDebug(debugX, debugY) {
 }
 
 function renderOuijaAnswer(inputTextValue, cb) {
-    inputTextValue = inputTextValue.replaceA(/\s/g, '_');
+    inputTextValue = inputTextValue.replace(/\s/g, '_');
 
     var tl = new TimelineLite({
       repeat: 1,
