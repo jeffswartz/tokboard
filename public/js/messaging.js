@@ -34,9 +34,9 @@ class ChatApp {
       const claims = message.split(':');
       const id = claims[0];
       const type = claims[1];
-      const message = claims[2];
+      const msg = claims[2];
       storage[id] = storage[id] || {};
-      storage[id][type] = message;
+      storage[id][type] = msg;
       if (type == 'question') {
         renderOujaQuestion(storage[id].question, () => {
           renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
