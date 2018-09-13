@@ -3,7 +3,7 @@ const YOUR_CONVERSATION_ID = 'CON-67617129-e7fc-4d8a-b224-bfee58b7f0e3';
 const voices = ['Salli', 'Joey', 'Naja', 'Mads', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma', 'Geraint', 'Gwyneth', 'Raveena', 'Chipmunk', 'Eric', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly', 'Conchita', 'Enrique', 'Penelope', 'Miguel', 'Chantal', 'Celine', 'Mathieu', 'Dora', 'Karl', 'Carla', 'Giorgio', 'Liv', 'Lotte', 'Ruben', 'Agnieszka', 'Jacek', 'Ewa', 'Jan', 'Maja', 'Vitoria', 'Ricardo', 'Cristiano', 'Ines', 'Carmen', 'Maxim', 'Tatyana', 'Astrid', 'Filiz', 'Mizuki', 'Seoyeon'];
 const englishVoices = ['Salli', 'Joey', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma', 'Geraint', 'Raveena', 'Chipmunk', 'Eric', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly'];
 var storage = {};
-var isRunning;
+var isRunning = false;
 
 class ChatApp {
   constructor() {
