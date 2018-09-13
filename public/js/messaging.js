@@ -87,8 +87,8 @@ toastr.options = {
 }
 
 function renderOujaQuestion(questionString, cb) {
-  toastr["success"]("asd");
-  cb()
+  toastr["success"](questionString);
+  cb();
 }
 
 function renderOuijaAnswer(answerString, cb) {
