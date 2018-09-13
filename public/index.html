@@ -42,12 +42,6 @@
 var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
 
-$(textInput).keyup(function() {
-  var textLength = $(textInput).val().length;
-  var textLength = maxLength - textLength;
-  $('#chars').text(textLength);
-});
-
 var ouijaLetters = {
   A: { x: 90, y: 330 },
   B: { x: 185, y: 280 },
