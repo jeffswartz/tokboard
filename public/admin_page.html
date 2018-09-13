@@ -67,7 +67,7 @@
   socket.on('message', function(msg){
     console.log(`socket message recv: ${msg}`);
     conversationClient.sendText(`${++id}:question:${msg}`);
-    conversationClient.sendText(`${++id}:answer:${answers[Math.floor(Math.random() * answers.length)]}`);
+    conversationClient.sendText(`${id}:answer:${answers[Math.floor(Math.random() * answers.length)]}`);
   });
 </script>
 </html>
