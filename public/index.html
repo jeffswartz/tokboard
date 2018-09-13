@@ -39,8 +39,6 @@
 </body>
 <script src="/js/messaging.js"></script>
 <script>
-var maxLength = 15;
-var textInput = document.getElementById('ouijaText');
 var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
 
@@ -78,6 +76,17 @@ var ouijaLetters = {
   X: { x: 910, y: 390 },
   Y: { x: 990, y: 430 },
   Z: { x: 1050, y: 480 },
+
+  '1': { x: 230, y: 550},
+  '2': { x: 290, y: 550},
+  '3': { x: 365, y: 550},
+  '4': { x: 445, y: 550},
+  '5': { x: 520, y: 550},
+  '6': { x: 600, y: 550},
+  '7': { x: 670, y: 550},
+  '8': { x: 750, y: 550},
+  '9': { x: 830, y: 550},
+  '0': { x: 910, y: 550},
 
   GB: { x: 550, y: 650}
 };
@@ -118,12 +127,6 @@ function draw() {
 
 window.requestAnimationFrame(draw);
 
-function clearInput() {
-  textInput = textInput.value = "";
-  textLength = 15;
-  $('#chars').text(textLength);
-}
-
 function renderOuijaAnswerDebug(debugX, debugY) {
     var tl = new TimelineLite({
       repeat: 1,
@@ -139,14 +142,7 @@ function renderOuijaAnswerDebug(debugX, debugY) {
     tl.play();
 }
 
-function renderOuijaAnswer(inputTextValue) {
-    if (inputTextValue.length > 1) {
-        console.log("user has input");
-    }
-    else {
-        alert("You didn't do anything.");
-    }
-
+function renderOuijaAnswer(inputTextValue, cb) {
     var tl = new TimelineLite({
       repeat: 1,
       repeatDelay: 3
@@ -195,7 +191,7 @@ function renderOuijaAnswer(inputTextValue) {
       y: ouijaLetters.GB.y
     }));
 
-
+    tl.eventCallback("onComplete", cb);
 
     tl.play();
 }
