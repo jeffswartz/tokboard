@@ -1,7 +1,6 @@
 const USER_JWT = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzY4NjcxMjQsImp0aSI6ImIxY2ViMDEwLWI3OGItMTFlOC1iNDU3LTJiZTJiNzZkNzNmOCIsInN1YiI6ImphbWllIiwiZXhwIjoxNTM2OTUzNTI0LCJhY2wiOnsicGF0aHMiOnsiL3YxL3VzZXJzLyoqIjp7fSwiL3YxL2NvbnZlcnNhdGlvbnMvKioiOnt9LCIvdjEvc2Vzc2lvbnMvKioiOnt9LCIvdjEvZGV2aWNlcy8qKiI6e30sIi92MS9pbWFnZS8qKiI6e30sIi92My9tZWRpYS8qKiI6e30sIi92MS9hcHBsaWNhdGlvbnMvKioiOnt9LCIvdjEvcHVzaC8qKiI6e30sIi92MS9rbm9ja2luZy8qKiI6e319fSwiYXBwbGljYXRpb25faWQiOiJkMjA2M2Y3Ny1hNzVkLTQ1NWMtYmIxOS03NzhjZDBjYTFlMGUifQ.WaNEJDW_o0QuNFjkMLblRgaBpAlT1P8TF84MWPI8Ga2EGEwYzfQv4P8LpTJ4JCI0zsQNEJ7U3Fu1F1vkJo96ElGmjSwZYli6Ej4RrxV3qHoU5QLWqBSvubLQcUtGJVRifMQxXCk9Cr_zFyHw6DaSrnnwMTOrHowW3a7m5P05pcR78n6hu1XvxqjH6B66ioXImX6htwRwmwwprLBgg8EOjrf6kPAgwQT2V3ncyxIa4-88c8IY8JDx6jV0Th9oGd2MLyP3XnhdoSjBsGt_0lqdJ2K6yMvt8lLccjTQoh-nReJcGcyl6ZsnxGNMhnFN5JjQPh7KdP2l9FnrLjZhYq5Slw';
 const YOUR_CONVERSATION_ID = 'CON-67617129-e7fc-4d8a-b224-bfee58b7f0e3';
-const voices = ['Salli', 'Joey', 'Naja', 'Mads', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma', 'Geraint', 'Gwyneth', 'Raveena', 'Chipmunk', 'Eric', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly', 'Conchita', 'Enrique', 'Penelope', 'Miguel', 'Chantal', 'Celine', 'Mathieu', 'Dora', 'Karl', 'Carla', 'Giorgio', 'Liv', 'Lotte', 'Ruben', 'Agnieszka', 'Jacek', 'Ewa', 'Jan', 'Maja', 'Vitoria', 'Ricardo', 'Cristiano', 'Ines', 'Carmen', 'Maxim', 'Tatyana', 'Astrid', 'Filiz', 'Mizuki', 'Seoyeon'];
-const englishVoices = ['Salli', 'Joey', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma', 'Geraint', 'Raveena', 'Chipmunk', 'Eric', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly'];
+const voices = ['Salli', 'Joey', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Eric', 'Brian', 'Emma', 'Geraint', 'Raveena', 'Chipmunk', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly'];
 var storage = {};
 var isRunning = false;
 
@@ -41,21 +40,23 @@ class ChatApp {
       if (type == 'question' && !isRunning) {
         isRunning = true;
         renderOujaQuestion(storage[id].question, () => {
-          renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
+          conversation.media.sayText({
+            text: storage[id].question,
+            voice_name: voices[Math.floor(Math.random() * voices.length)]
+          }).then(() => renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
             toastr.success(storage[id].answer, 'Answer From The Spirits:');
-            const voice = voices[Math.floor(Math.random() * englishVoices.length)];
             conversation.media.sayText({
               text: storage[id].answer || 'Reply hazy, try again',
-              voice_name: voice
+              voice_name: 'Amy'
             });
             setTimeout(() => {
               isRunning = false;
             }, 400);
-          });
+          }));
         });
       }
     });
-  }
+  };
 
   joinConversation(userToken) {
     new ConversationClient({
