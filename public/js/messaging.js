@@ -87,7 +87,7 @@ toastr.options = {
 }
 
 function renderOujaQuestion(questionString, cb) {
-  toastr.success('New Question For the Spirits:', questionString);
+  toastr.success(questionString, 'New Question For the Spirits:');
   cb();
 }
 
