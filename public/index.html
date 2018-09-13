@@ -191,11 +191,11 @@ function renderOuijaAnswer(inputTextValue, cb) {
       y: ouijaLetters.GB.y
     }));
 
-    tl.eventCallback("onUpdate", function() {
-      currentOutputText += inputTextValue[++currentIndex];
-      toastr.clear();
-      toastr.success(currentOutputText, 'Answer From The Spirits:');
-    });
+    // tl.eventCallback("onUpdate", function() {
+    //   currentOutputText += inputTextValue[currentIndex++];
+    //   toastr.clear();
+    //   toastr.success(currentOutputText, 'Answer From The Spirits:');
+    // });
 
     timelinePromise(tl.play()).then(cb);
 }
@@ -204,7 +204,7 @@ var timelinePromise = function(timeline) {
    return new Promise(function(resolve) {
       //alternate syntax for adding a callback
       timeline.eventCallback("onComplete", function() {
-        timeline.eventCallback("onUpdate", () => {});
+        // timeline.eventCallback("onUpdate", () => {});
          resolve(true);
       });
    });

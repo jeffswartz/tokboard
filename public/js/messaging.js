@@ -78,6 +78,8 @@ new ChatApp();
 toastr.options = {
   "closeButton": false,
   "debug": false,
+  "maxOpened": 1,
+  "autoDismiss": true,
   "newestOnTop": false,
   "progressBar": false,
   "positionClass": "toast-top-center",
