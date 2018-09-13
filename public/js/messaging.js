@@ -14,6 +14,7 @@ class ChatApp {
     conversation.media.enable().then(stream => {
       window.media = conversation.media;
       conversation.media.mute(true);
+      this.sendMessage('This is a demo.');
       // Older browsers may not have srcObject
       if ('srcObject' in this.audio) {
         this.audio.srcObject = stream;

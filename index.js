@@ -5,8 +5,13 @@ const path = require('path');
 const https = require('https');
 const express = require('express');
 const bodyParser = require('body-parser');
+const request = require('request');
 const IS_PROD = process.env.IS_PROD || false;
+const NEXMO_API_KEY = process.env.NEXMO_API_KEY;
+const NEXMO_API_SECRET = process.env.NEXMO_API_SECRET;
+const CONVERSATION_ID = 'CON-67617129-e7fc-4d8a-b224-bfee58b7f0e3';
 
+var questionsReceived = [];
 
 if (IS_PROD) {
   const httpsApp = express();
@@ -35,24 +40,49 @@ if (IS_PROD) {
   });
 
   function handleInboundSms(request, response) {
+    // remote: {"msisdn":"14156290902",
+    // "to":"12034569996",
+    // "messageId":"0B0000000FCD4831",
+    // "text":"hello",
+    // "type":"text",
+    // "keyword":"HELLO",
+    // "message-timestamp":"2018-09-13 05:58:23"}
     const params = Object.assign(request.query, request.body);
-    console.log(JSON.stringify(params));
+    questionsReceived.push(params.text);
+
     response.status(204).send();
   }
 }
 
 const httpApp = express();
 if (IS_PROD) {
+  const io = require('socket.io')(httpsApp);
   console.log('HTTP Server running as prod config, will redirect to HTTPS');
   httpApp.get('*', function (req, res, next) {
       res.redirect('https://tokboard.com' + req.path);
   });
 } else {
+  const io = require('socket.io')(httpApp);
   console.log('HTTP Server running as dev config, will serve static content');
   httpApp.use(express.static(path.join(__dirname, 'public')));
 }
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
 const httpServer = http.createServer(httpApp);
-httpServer.listen(80, () => {
+httpServer.listen(IS_PROD ? 80 : 8080, () => {
   console.log('HTTP Server running on port 80');
 });
 
+function sendToConversation(text) {
+  // request({
+  //   method: 'PUT',
+  //   url: `https://api.nexmo.com/beta/conversations/${CONVERSATION_ID}`,
+  //   body: values,
+  //   json: true,
+  //   headers: {
+  //     'User-Agent': 'request'
+  //   }
+  // }, (err, res, body) => {
+  // });
+}
