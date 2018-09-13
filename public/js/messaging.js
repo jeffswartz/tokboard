@@ -61,7 +61,9 @@ class ChatApp {
         return app.getConversation(YOUR_CONVERSATION_ID);
       })
       .then(this.setupConversationEvents.bind(this))
-      .catch(console.error)
+      .catch((err) => {
+        console.error(err);
+      });
   }
 }
 
