@@ -29,10 +29,9 @@
   }
 </style>
 <body>
+<div id="canvasDiv"><canvas id="myCanvas" width="1250" height="841"></canvas></div>
 <h3 align="center">Text A Question</h3>
 <h1 align="center">120-3456-9996</h1>
-<div id="canvasDiv"><canvas id="myCanvas" width="1250" height="841"></canvas></div>
-
 <audio id="audio">
   <source>
 </audio>
@@ -140,6 +139,8 @@ function renderOuijaAnswerDebug(debugX, debugY) {
 }
 
 function renderOuijaAnswer(inputTextValue, cb) {
+    var currentOutputText = '';
+    var currentIndex = 0;
     inputTextValue = inputTextValue.replace(/\s/g, '_');
 
     var tl = new TimelineLite({
@@ -190,6 +191,12 @@ function renderOuijaAnswer(inputTextValue, cb) {
       y: ouijaLetters.GB.y
     }));
 
+    timeline.eventCallback("onUpdate", function() {
+      currentOutputText += inputTextValue[++currentIndex];
+      toastr.clear();
+      toastr.success(currentOutputText, 'Answer From The Spirits:');
+    });
+
     timelinePromise(tl.play()).then(cb);
 }
 
@@ -198,7 +205,7 @@ var timelinePromise = function(timeline) {
       //alternate syntax for adding a callback
       timeline.eventCallback("onComplete", function() {
          resolve(true);
-      })
+      });
    });
 }
 
