@@ -87,7 +87,7 @@ toastr.options = {
 }
 
 function renderOujaQuestion(questionString, cb) {
-  toastr["success"](questionString);
+  toastr.success(questionString);
   cb();
 }
 
