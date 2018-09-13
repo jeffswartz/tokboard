@@ -21,11 +21,7 @@ class ChatApp {
 
   setupConversationEvents(conversation) {
     this.conversation = conversation;
-    conversation.media.enable().then(stream => {
-      window.media = conversation.media;
-      conversation.media.mute(true);
-      this.sendMessage('This is a demo.');
-    });
+    conversationClient = conversation;
   }
 
   joinConversation(userToken) {
