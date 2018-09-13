@@ -6,6 +6,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenLite.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TimelineLite.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/nexmo-stitch@2.1.0/dist/conversationClient.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <style>
   body {
@@ -14,7 +15,7 @@
     font-family: 'Open Sans', sans-serif;
   }
   div {
-    width: 640px;
+    width: 1563px;
     margin: 0 auto;
     text-align: center;
   }
@@ -39,7 +40,7 @@
 </audio>
 
 </body>
-<script src="/js/messaging.js">
+<script src="/js/messaging.js"></script>
 <script>
 var maxLength = 15;
 var textInput = document.getElementById('ouijaText');
@@ -80,7 +81,7 @@ planchette.x = ouijaLetters.GB.x;
 planchette.y = ouijaLetters.GB.y;
 
 window.onload = function() {
-  context.drawImage(ouijaBoard, 0, 0, 640, 430);
+  context.drawImage(ouijaBoard, 0, 0, 1563, 1052);
   context.drawImage(planchette.img, planchette.x, planchette.y, 158, 215);
 };
 
@@ -88,7 +89,7 @@ function draw() {
   window.requestAnimationFrame(draw);
   context.save();
   context.clearRect(0, 0, canvas.width, canvas.height);
-  context.drawImage(ouijaBoard, 0, 0, 640, 430);
+  context.drawImage(ouijaBoard, 0, 0, 1563, 1052);
   //context.translate(planchette.registration.x, planchette.registration.y);
   //context.rotate(planchette.rotation * Math.PI / 180);
   context.drawImage(planchette.img, planchette.x, planchette.y, 158, 216);
