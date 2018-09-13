@@ -29,7 +29,7 @@ class ChatApp {
       })
       .login(userToken)
       .then(app => {
-        console.log('*** Logged into app', app);
+        console.log('Logged into app', app);
         return app.getConversation(YOUR_CONVERSATION_ID);
       })
       .then(this.setupConversationEvents.bind(this))
