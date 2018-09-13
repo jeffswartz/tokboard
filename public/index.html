@@ -65,16 +65,27 @@ var ouijaLetters = {
   B: { x: 185, y: 280 },
   C: { x: 260, y: 240 },
   D: { x: 335, y: 220 },
-  E: { x: 90, y: 330 },
-  F: { x: 90, y: 330 },
-  G: { x: 90, y: 330 },
+  E: { x: 410, y: 210 },
+  F: { x: 490, y: 200 },
+  G: { x: 570, y: 190 },
+  H: { x: 650, y: 200 },
+  I: { x: 740, y: 200 },
+  J: { x: 800, y: 210 },
+  K: { x: 890, y: 240 },
+  L: { x: 960, y: 280 },
+  M: { x: 1050, y: 300 },
 
 
-  H: { x: 285, y: 60 },
+
+
+
+
+
+
   E: { x: 160, y: 65 },
   T: { x: 235, y: 120 },
   R: { x: 155, y: 135 },
-  GB: { x: 145, y: 300}
+  GB: { x: 550, y: 650}
 };
 
 var ouijaBoard = new Image();
@@ -129,12 +140,6 @@ function renderOuijaAnswerDebug(debugX, debugY) {
       ease: Power2.easeInOut,
       x: debugX,
       y: debugY
-    }));
-
-    tl.add(TweenLite.to(planchette, 1, {
-      ease: Power2.easeInOut,
-      x: ouijaLetters.GB.x,
-      y: ouijaLetters.GB.y
     }));
 
     tl.play();
