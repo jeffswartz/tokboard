@@ -54,7 +54,7 @@ if (IS_PROD) {
     // "message-timestamp":"2018-09-13 05:58:23"}
     const params = Object.assign(request.query, request.body);
     questionsReceived.push(params.text);
-
+    io.emit('message', params.text);
     response.status(204).send();
   }
 }
