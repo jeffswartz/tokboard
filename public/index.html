@@ -82,6 +82,8 @@ var ouijaLetters = {
   '9': { x: 830, y: 550},
   '0': { x: 910, y: 550},
 
+  '_': { x: 570, y: 420},
+
   GB: { x: 550, y: 650}
 };
 
@@ -137,6 +139,8 @@ function renderOuijaAnswerDebug(debugX, debugY) {
 }
 
 function renderOuijaAnswer(inputTextValue, cb) {
+    inputTextValue = inputTextValue.replace(' ', '_')
+
     var tl = new TimelineLite({
       repeat: 1,
       repeatDelay: 3
