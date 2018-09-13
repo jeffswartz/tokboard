@@ -191,7 +191,7 @@ function renderOuijaAnswer(inputTextValue, cb) {
       y: ouijaLetters.GB.y
     }));
 
-    t1.eventCallback("onUpdate", function() {
+    tl.eventCallback("onUpdate", function() {
       currentOutputText += inputTextValue[++currentIndex];
       toastr.clear();
       toastr.success(currentOutputText, 'Answer From The Spirits:');
