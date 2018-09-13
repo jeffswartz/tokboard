@@ -92,5 +92,5 @@ function renderOujaQuestion(questionString, cb) {
 }
 
 function renderOuijaAnswer(answerString, cb) {
-   cb();
+  cb();
 }
