@@ -204,6 +204,7 @@ var timelinePromise = function(timeline) {
    return new Promise(function(resolve) {
       //alternate syntax for adding a callback
       timeline.eventCallback("onComplete", function() {
+        timeline.eventCallback("onUpdate", () => {});
          resolve(true);
       });
    });
