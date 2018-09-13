@@ -26,7 +26,9 @@ class ChatApp {
       this.audio.onloadedmetadata = () => {
         this.audio.play();
       }
-    }).catch(err => console.error('media.enable error', err));
+    }).catch(err => {
+      console.error('media.enable error', err);
+    });
 
     conversation.on('text', (sender, message) => {
       console.log('*** Message received', sender.id, message.body.text);
