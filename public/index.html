@@ -101,7 +101,7 @@ var planchette = {
   rotation: 0
 };
 
-planchette.img.src = 'http://i67.tinypic.com/2b6u5e.jpg';
+planchette.img.src = 'https://i67.tinypic.com/2b6u5e.jpg';
 planchette.x = ouijaLetters.GB.x;
 planchette.y = ouijaLetters.GB.y;
 
@@ -191,7 +191,7 @@ function renderOuijaAnswer(inputTextValue, cb) {
       y: ouijaLetters.GB.y
     }));
 
-    timeline.eventCallback("onUpdate", function() {
+    t1.eventCallback("onUpdate", function() {
       currentOutputText += inputTextValue[++currentIndex];
       toastr.clear();
       toastr.success(currentOutputText, 'Answer From The Spirits:');
