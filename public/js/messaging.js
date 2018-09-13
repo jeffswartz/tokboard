@@ -38,15 +38,15 @@ class ChatApp {
       storage[id] = storage[id] || {};
       storage[id][type] = msg;
       if (type == 'question') {
-        renderOujaQuestion(storage[id].question, () => {
-          renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
+        // renderOujaQuestion(storage[id].question, () => {
+          // renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
             const voice = voices[Math.floor(Math.random() * englishVoices.length)];
             conversation.media.sayText({
               text: storage[id].answer || 'Reply hazy, try again',
               voice_name: voice
             });
-          });
-        });
+          // });
+        // });
       }
     });
   }
