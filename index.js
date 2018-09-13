@@ -4,6 +4,7 @@ const http = require('http');
 const path = require('path');
 const https = require('https');
 const express = require('express');
+const bodyParser = require('body-parser');
 const IS_PROD = process.env.IS_PROD || false;
 
 
@@ -20,10 +21,24 @@ if (IS_PROD) {
   };
 
   httpsApp.use(express.static(path.join(__dirname, 'public')));
+  httpsApp.use(bodyParser.json());
+  httpsApp.use(bodyParser.urlencoded({ extended: true }));
+
+  httpsApp
+    .route('/webhooks/inbound-sms')
+    .get(handleInboundSms)
+    .post(handleInboundSms);
+
   const httpsServer = https.createServer(credentials, httpsApp);
   httpsServer.listen(443, () => {
     console.log('HTTPS Server running on port 443');
   });
+
+  function handleInboundSms(request, response) {
+    const params = Object.assign(request.query, request.body);
+    console.log(params);
+    response.status(204).send();
+  }
 }
 
 const httpApp = express();
