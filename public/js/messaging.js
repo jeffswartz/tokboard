@@ -3,6 +3,7 @@ const YOUR_CONVERSATION_ID = 'CON-67617129-e7fc-4d8a-b224-bfee58b7f0e3';
 const voices = ['Salli', 'Joey', 'Naja', 'Mads', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma', 'Geraint', 'Gwyneth', 'Raveena', 'Chipmunk', 'Eric', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly', 'Conchita', 'Enrique', 'Penelope', 'Miguel', 'Chantal', 'Celine', 'Mathieu', 'Dora', 'Karl', 'Carla', 'Giorgio', 'Liv', 'Lotte', 'Ruben', 'Agnieszka', 'Jacek', 'Ewa', 'Jan', 'Maja', 'Vitoria', 'Ricardo', 'Cristiano', 'Ines', 'Carmen', 'Maxim', 'Tatyana', 'Astrid', 'Filiz', 'Mizuki', 'Seoyeon'];
 const englishVoices = ['Salli', 'Joey', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma', 'Geraint', 'Raveena', 'Chipmunk', 'Eric', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly'];
 var storage = {};
+var isRunning;
 
 class ChatApp {
   constructor() {
@@ -37,7 +38,8 @@ class ChatApp {
       const msg = claims[2];
       storage[id] = storage[id] || {};
       storage[id][type] = msg;
-      if (type == 'question') {
+      if (type == 'question' && !isRunning) {
+        isRunning = true;
         renderOujaQuestion(storage[id].question, () => {
           renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
             toastr.success('Answer From The Spirits:', storage[id].answer);
@@ -46,6 +48,9 @@ class ChatApp {
               text: storage[id].answer || 'Reply hazy, try again',
               voice_name: voice
             });
+            setTimeout(() => {
+              isRunning = false;
+            }, 500);
           });
         });
       }
