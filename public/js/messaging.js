@@ -31,7 +31,7 @@ class ChatApp {
     });
 
     conversation.on('text', (sender, message) => {
-      const claims = message.body.split(':');
+      const claims = message.body.text.split(':');
       const id = claims[0];
       const type = claims[1];
       const msg = claims[2];
