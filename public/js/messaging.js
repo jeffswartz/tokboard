@@ -40,6 +40,7 @@ class ChatApp {
       if (type == 'question') {
         renderOujaQuestion(storage[id].question, () => {
           renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
+            toastr.success(storage[id].answer, 'Answer From The Spirits:');
             const voice = voices[Math.floor(Math.random() * englishVoices.length)];
             conversation.media.sayText({
               text: storage[id].answer || 'Reply hazy, try again',
