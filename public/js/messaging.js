@@ -50,7 +50,7 @@ class ChatApp {
             });
             setTimeout(() => {
               isRunning = false;
-            }, 500);
+            }, 400);
           });
         });
       }
