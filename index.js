@@ -52,7 +52,7 @@ if (IS_PROD) {
   httpApp.use(express.static(path.join(__dirname, 'public')));
 }
 const httpServer = http.createServer(httpApp);
-httpServer.listen(8080, () => {
+httpServer.listen(80, () => {
   console.log('HTTP Server running on port 80');
 });
 
