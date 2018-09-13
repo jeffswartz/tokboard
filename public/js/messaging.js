@@ -2,6 +2,7 @@ const USER_JWT = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MzY3ODU4OTAsI
 const YOUR_CONVERSATION_ID = 'CON-67617129-e7fc-4d8a-b224-bfee58b7f0e3';
 const voices = ['Salli', 'Joey', 'Naja', 'Mads', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma', 'Geraint', 'Gwyneth', 'Raveena', 'Chipmunk', 'Eric', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly', 'Conchita', 'Enrique', 'Penelope', 'Miguel', 'Chantal', 'Celine', 'Mathieu', 'Dora', 'Karl', 'Carla', 'Giorgio', 'Liv', 'Lotte', 'Ruben', 'Agnieszka', 'Jacek', 'Ewa', 'Jan', 'Maja', 'Vitoria', 'Ricardo', 'Cristiano', 'Ines', 'Carmen', 'Maxim', 'Tatyana', 'Astrid', 'Filiz', 'Mizuki', 'Seoyeon'];
 const englishVoices = ['Salli', 'Joey', 'Marlene', 'Hans', 'Nicole', 'Russell', 'Amy', 'Brian', 'Emma', 'Geraint', 'Raveena', 'Chipmunk', 'Eric', 'Ivy', 'Jennifer', 'Justin', 'Kendra', 'Kimberly'];
+var storage = {};
 
 class ChatApp {
   constructor() {
@@ -30,11 +31,23 @@ class ChatApp {
     });
 
     conversation.on('text', (sender, message) => {
-      const voice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
-      conversation.media.sayText({
-        text: message.body.text,
-        voice_name: voice
-      });
+      const claims = message.split(':');
+      const id = claims[0];
+      const type = claims[1];
+      const message = claims[2];
+      storage[id] = storage[id] || {};
+      storage[id][type] = message;
+      if (type == 'question') {
+        renderOujaQuestion(storage[id].question, () => {
+          renderOuijaAnswer(storage[id].answer || 'Reply hazy, try again', () => {
+            const voice = voices[Math.floor(Math.random() * englishVoices.length)];
+            conversation.media.sayText({
+              text: storage[id].answer || 'Reply hazy, try again',
+              voice_name: voice
+            });
+          });
+        });
+      }
     });
   }
 
