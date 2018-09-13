@@ -66,8 +66,8 @@
   const socket = io();
   socket.on('message', function(msg){
     console.log(`socket message recv: ${msg}`);
-    conversationClient.sendText(`${id}:answer:${answers[Math.floor(Math.random() * answers.length)]}`);
-    conversationClient.sendText(`${++id}:question:${msg.replace(':', '')}`);
+    conversationClient.sendText(`${++id}:answer:${answers[Math.floor(Math.random() * answers.length)]}`);
+    conversationClient.sendText(`${id}:question:${msg.replace(':', '')}`);
   });
 </script>
 </html>
